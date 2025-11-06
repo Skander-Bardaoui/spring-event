@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class EventService {
+
     private final EventRepository repo;
 
     public EventService(EventRepository repo) {
@@ -26,6 +26,7 @@ public class EventService {
     }
 
     public Event create(Event event) {
+        if (event.getNblikes() == null) event.setNblikes(0); // initialisation
         return repo.save(event);
     }
 
@@ -40,12 +41,31 @@ public class EventService {
         existing.setOrganizerid(updated.getOrganizerid());
         existing.setImageUrl(updated.getImageUrl());
         existing.setNbplaces(updated.getNbplaces());
-        existing.setNblikes(updated.getNblikes());
+        existing.setNblikes(updated.getNblikes() != null ? updated.getNblikes() : 0);
 
         return repo.save(existing);
     }
 
+    // delete
     public void delete(Long id) {
         repo.deleteById(id);
+    }
+
+    // like 👍
+    public Event likeEvent(Long id) {
+        Event event = findById(id);
+        if (event.getNblikes() == null) event.setNblikes(0); // sécurité null
+        event.setNblikes(event.getNblikes() + 1);
+        return repo.save(event);
+    }
+
+    // dislike 👎
+    public Event dislikeEvent(Long id) {
+        Event event = findById(id);
+        if (event.getNblikes() == null) event.setNblikes(0);
+        if (event.getNblikes() > 0) {
+            event.setNblikes(event.getNblikes() - 1);
+        }
+        return repo.save(event);
     }
 }

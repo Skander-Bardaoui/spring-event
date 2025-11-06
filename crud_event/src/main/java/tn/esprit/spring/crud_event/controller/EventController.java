@@ -12,14 +12,22 @@ import java.util.List;
 @RequestMapping("/api/events")
 @CrossOrigin(origins = "http://localhost:4200")
 public class EventController {
+
     private final EventService service;
-    public EventController(EventService service) { this.service = service; }
+
+    public EventController(EventService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<Event> all() { return service.findAll(); }
+    public List<Event> all() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Event get(@PathVariable Long id) { return service.findById(id); }
+    public Event get(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Event event) {
@@ -27,11 +35,10 @@ public class EventController {
             Event saved = service.create(event);
             return ResponseEntity.created(URI.create("/api/events/" + saved.getId())).body(saved);
         } catch (Exception e) {
-            e.printStackTrace(); // print full error in backend logs
+            e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
-
 
     @PutMapping("/{id}")
     public Event update(@PathVariable Long id, @Valid @RequestBody Event event) {
@@ -42,5 +49,17 @@ public class EventController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // ✅ Like endpoint
+    @PutMapping("/{id}/like")
+    public Event likeEvent(@PathVariable Long id) {
+        return service.likeEvent(id);
+    }
+
+    // ✅ Dislike endpoint
+    @PutMapping("/{id}/dislike")
+    public Event dislikeEvent(@PathVariable Long id) {
+        return service.dislikeEvent(id);
     }
 }

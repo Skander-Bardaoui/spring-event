@@ -30,6 +30,8 @@ public class Event {
 
     private Long organizerid;
 
+    @Lob
+    @Column(name = "image_url", columnDefinition = "LONGTEXT")
     private String imageUrl;
 
     private Integer nbplaces;
