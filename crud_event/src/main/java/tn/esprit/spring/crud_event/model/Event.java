@@ -30,6 +30,9 @@ public class Event {
 
     private Long organizerid;
 
+    private int rate = 0;
+
+
     @Lob
     @Column(name = "image_url", columnDefinition = "LONGTEXT")
     private String imageUrl;
@@ -53,6 +56,7 @@ public class Event {
         this.imageUrl = imageUrl;
         this.nbplaces = nbplaces;
         this.nblikes = nblikes;
+        this.rate = 0;
     }
 
     // getters / setters
@@ -85,4 +89,7 @@ public class Event {
 
     public Integer getNblikes() { return nblikes; }
     public void setNblikes(Integer nblikes) { this.nblikes = nblikes; }
+
+    public int getRate() { return rate; }
+    public void setRate(int rate) { this.rate = rate; }
 }

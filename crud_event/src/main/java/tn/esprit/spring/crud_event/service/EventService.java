@@ -1,5 +1,6 @@
 package tn.esprit.spring.crud_event.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import tn.esprit.spring.crud_event.exception.ResourceNotFoundException;
 import tn.esprit.spring.crud_event.model.Event;
 import tn.esprit.spring.crud_event.repo.EventRepository;
@@ -67,5 +68,17 @@ public class EventService {
             event.setNblikes(event.getNblikes() - 1);
         }
         return repo.save(event);
+    }
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    public Event rateEvent(Long id, int rate) {
+
+        Event e = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+
+        e.setRate(rate);
+        return eventRepository.save(e);
     }
 }

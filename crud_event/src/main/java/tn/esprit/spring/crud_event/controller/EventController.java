@@ -62,4 +62,10 @@ public class EventController {
     public Event dislikeEvent(@PathVariable Long id) {
         return service.dislikeEvent(id);
     }
+
+
+    @PutMapping("/events/{id}/rate")
+    public Event rateEvent(@PathVariable Long id, @RequestParam int rate) {
+        return service.rateEvent(id, rate); // call NON-STATIC method
+    }
 }
