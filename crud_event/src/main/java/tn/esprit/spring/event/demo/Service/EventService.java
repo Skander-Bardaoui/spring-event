@@ -1,10 +1,9 @@
-package tn.esprit.spring.crud_event.service;
+package tn.esprit.spring.event.demo.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import tn.esprit.spring.crud_event.exception.ResourceNotFoundException;
-import tn.esprit.spring.crud_event.model.Event;
-import tn.esprit.spring.crud_event.repo.EventRepository;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+import tn.esprit.spring.event.demo.Model.Event;
+import tn.esprit.spring.event.demo.Repository.EventRepository;
 
 import java.util.List;
 
@@ -70,15 +69,5 @@ public class EventService {
         return repo.save(event);
     }
 
-    @Autowired
-    private EventRepository eventRepository;
 
-    public Event rateEvent(Long id, int rate) {
-
-        Event e = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
-
-        e.setRate(rate);
-        return eventRepository.save(e);
-    }
 }

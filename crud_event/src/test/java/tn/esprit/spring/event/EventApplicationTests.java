@@ -1,10 +1,10 @@
-package tn.esprit.spring.crud_event;
+package tn.esprit.spring.event;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CrudEventApplicationTests {
+class EventApplicationTests {
 
     @Test
     void contextLoads() {

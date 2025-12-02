@@ -1,13 +1,13 @@
-package tn.esprit.spring.crud_event;
+package tn.esprit.spring.event;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrudEventApplication {
+public class EventApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CrudEventApplication.class, args);
+        SpringApplication.run(EventApplication.class, args);
     }
 
 }

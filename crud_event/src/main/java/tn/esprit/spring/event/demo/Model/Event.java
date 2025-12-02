@@ -1,5 +1,6 @@
-package tn.esprit.spring.crud_event.model;
+package tn.esprit.spring.event.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -8,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "events")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +32,6 @@ public class Event {
     private Double price;
 
     private Long organizerid;
-
-    private int rate = 0;
-
 
     @Lob
     @Column(name = "image_url", columnDefinition = "LONGTEXT")
@@ -56,7 +56,6 @@ public class Event {
         this.imageUrl = imageUrl;
         this.nbplaces = nbplaces;
         this.nblikes = nblikes;
-        this.rate = 0;
     }
 
     // getters / setters
@@ -89,7 +88,4 @@ public class Event {
 
     public Integer getNblikes() { return nblikes; }
     public void setNblikes(Integer nblikes) { this.nblikes = nblikes; }
-
-    public int getRate() { return rate; }
-    public void setRate(int rate) { this.rate = rate; }
 }
